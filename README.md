@@ -41,7 +41,6 @@ name popularity.
 ## Repository Structure
 ```
 .
-├── .env_template
 ├── requirements.txt
 └── README.md
 ```

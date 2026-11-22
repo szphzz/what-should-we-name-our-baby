@@ -41,6 +41,7 @@ name popularity.
 ## Repository Structure
 ```
 .
+├── 01_create_name_rdd.ipynb
 ├── requirements.txt
 └── README.md
 ```

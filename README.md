@@ -35,7 +35,7 @@ name popularity. Our analysis is limited to the years 1880 - 2019 since the SSA 
 ### Sources
 | # | Source & Link | What it contains | Schema | Access requirements |
 | --- | --- | --- | --- | --- |
-| 1 | [Google Books N-gram](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2sgoogle_books_ngrams_2020!3seng_us_1) | This version of the dataset was generated in February 2020 and contains all of the words in the American English books Google has scanned. The dataset contains about 50 million records and is 68 GB. | <ul><li>term (string)</li><li>term_frequency (integer)</li><li>document_frequency (integer)</li><li>tokens (string)</li><li>has_tag (boolean)</li><li>years [year (integer), term_frequency (integer), document_frequency (integer)]</li></ul> | Google Cloud Account |
+| 1 | [Google Books N-gram](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2sgoogle_books_ngrams_2020!3seng_us_1) | This version of the dataset was generated in February 2020 and contains all of the words in the American English books Google has scanned. The dataset contains about 50 million records and is 68 GB uncompressed, so we used SQL to filter the dataset to names present in our second dataset from 1880, prior to creating the initial RDD. | <ul><li>term (string)</li><li>term_frequency (integer)</li><li>document_frequency (integer)</li><li>tokens (string)</li><li>has_tag (boolean)</li><li>years [year (integer), term_frequency (integer), document_frequency (integer)]</li></ul> | Google Cloud Account |
 | 2 | [Social Security Administration Baby Names](https://www.ssa.gov/oact/babynames/names.zip) | For each year from 1880, there is a comma-delimited file called yobYYYY.txt. Names have at least 5 occurrences and come from U.S. births where the individual has a Social Security Number. The dataset contains about 2 million records and is 57 MB. | <ul><li>Name (string)</li><li>Sex (string)</li><li>Number (integer)</li></ul> | No requirements |
 
 
@@ -43,6 +43,7 @@ name popularity. Our analysis is limited to the years 1880 - 2019 since the SSA 
 ```
 .
 ├── 01_create_name_ngram_rdd.ipynb
-├── requirements.txt
-└── README.md
+├── BigQueryFiltering.sql
+├── README.md
+└── requirements.txt
 ```

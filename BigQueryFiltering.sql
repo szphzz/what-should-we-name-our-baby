@@ -3,7 +3,7 @@
 CREATE OR REPLACE EXTERNAL TABLE `dsai694.baby_names.ssa_raw` (
   name STRING, sex STRING, count INT64
 )
-OPTIONS (format = 'CSV', uris = ['gs://what-should-we-name-our-baby/yob*.txt']);
+OPTIONS (format = 'CSV', uris = ['gs://what-should-we-name-our-baby/*.txt']);
 
 -- 2. View that rebuilds `year` from the filename and lowercases `name`.
 CREATE OR REPLACE VIEW `dsai694.baby_names.ssa` AS
@@ -43,10 +43,9 @@ WHERE n.has_tag = FALSE
 AND y.year >= 1880
 AND LOWER(n.term) IN (SELECT name FROM names);
 
-
 -- 7. Export the filtered n-grams to GCS as CSV for Spark (sc.textFile).
 EXPORT DATA OPTIONS(
-  uri = 'gs://what-should-we-name-our-baby/ngrams_names/*.csv',
+  uri = 'gs://what-should-we-name-our-baby/ngrams/*.csv',
   format = 'CSV',
   overwrite = true
 ) AS
